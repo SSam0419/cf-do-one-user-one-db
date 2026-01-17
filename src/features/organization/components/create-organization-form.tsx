@@ -1,7 +1,4 @@
-import { orpcQuery } from "@/features/shared/lib/orpc";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
+import { useCreateOrganizationMutation } from "@/features/organization/hooks/organizations";
 import { Button } from "@/features/shared/components/ui/button";
 import {
   Field,
@@ -17,6 +14,7 @@ import {
   createOrganizationValidation,
   type CreateOrganizationValidation,
 } from "@/worker/server/validations";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 type CreateOrganizationFormProps = {
@@ -32,25 +30,7 @@ export const CreateOrganizationForm = ({
   cancelButton,
   onSuccess,
 }: CreateOrganizationFormProps) => {
-  const navigate = useNavigate();
-  const createOrganizationMutation = useMutation({
-    ...orpcQuery.organizations.create.mutationOptions({
-      meta: {
-        successMessage: "Organization created successfully",
-        errorMessage: "Failed to create organization",
-      },
-      onSuccess: (data) => {
-        if (!data) return;
-        navigate({
-          to: "/app/$slug",
-          params: {
-            slug: data.slug,
-          },
-        });
-        onSuccess?.();
-      },
-    }),
-  });
+  const createOrganizationMutation = useCreateOrganizationMutation({ onSuccess });
 
   const form = useForm<CreateOrganizationValidation>({
     resolver: zodResolver(createOrganizationValidation),

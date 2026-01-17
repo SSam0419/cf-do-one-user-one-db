@@ -1,7 +1,7 @@
 import { cn } from "@/features/shared/lib/utils";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/app/$slug/organization")({
+export const Route = createFileRoute("/app/$slug/settings")({
   component: RouteComponent,
 });
 

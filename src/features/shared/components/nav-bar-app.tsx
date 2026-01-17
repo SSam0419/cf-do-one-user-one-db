@@ -17,8 +17,8 @@ export const NavBarApp = ({ slug }: { slug: string }) => {
         >
           Items
         </NavBarLinkItem>
-        <NavBarLinkItem to="/app/$slug/organization" params={{ slug: slug }}>
-          Organizations
+        <NavBarLinkItem to="/app/$slug/settings" params={{ slug: slug }}>
+          Settings
         </NavBarLinkItem>
       </div>
       <div className="flex items-center gap-2 ml-auto">

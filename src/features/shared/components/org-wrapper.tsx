@@ -1,5 +1,5 @@
+import { useOrganizations } from "@/features/organization/hooks/organizations";
 import { Skeleton } from "@/features/shared/components/ui/skeleton";
-import { authClient } from "@/lib/auth-client";
 import { createContext, useContext } from "react";
 
 type OrgWrapperContext = {
@@ -10,6 +10,7 @@ const OrgWrapperContext = createContext<OrgWrapperContext | undefined>(
   undefined
 );
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useOrgWrapper = () => {
   const context = useContext(OrgWrapperContext);
   if (!context) {
@@ -25,13 +26,16 @@ export const OrgWrapper = ({
   orgSlug: string;
   children: React.ReactNode;
 }) => {
-  const org = authClient.useListOrganizations();
+  const org = useOrganizations();
+
   if (org.isPending) {
     return <Skeleton className="w-full h-64" />;
   }
+
   if (org.error) {
     return <div>Error loading organization</div>;
   }
+
   const orgId = org.data?.find((org) => org.slug === orgSlug)?.id;
   if (!orgId) {
     return <div>Organization not found</div>;

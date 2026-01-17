@@ -1,23 +1,11 @@
+import { useMembers } from "@/features/organization/hooks/members";
 import { Skeleton } from "@/features/shared/components/ui/skeleton";
-import { authClient } from "@/lib/auth-client";
-import { useQuery } from "@tanstack/react-query";
 import { Mail } from "lucide-react";
 
-export const MembersList = ({ slug }: { slug: string }) => {
-  const membersQuery = useQuery({
-    queryKey: [slug, "members"],
-    queryFn: async () => {
-      const members = await authClient.organization.listMembers({
-        query: { organizationSlug: slug },
-      });
-      if (members.error) {
-        throw new Error(members.error.message || members.error.statusText);
-      }
-      return members.data;
-    },
-  });
+export const MembersList = ({ orgId }: { orgId: string }) => {
+  const membersQuery = useMembers({ orgId });
 
-  if (membersQuery.isPending) {
+    if (membersQuery.isPending) {
     return (
       <div className="space-y-2">
         {Array.from({ length: 5 }).map(() => (

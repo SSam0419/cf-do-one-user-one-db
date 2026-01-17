@@ -3,7 +3,7 @@ import { InviteMemberButton } from "@/features/organization/components/invite-me
 import { useOrgWrapper } from "@/features/shared/components/org-wrapper";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/app/$slug/organization/invitations")({
+export const Route = createFileRoute("/app/$slug/settings/invitations")({
   component: RouteComponent,
 });
 

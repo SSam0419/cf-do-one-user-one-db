@@ -17,10 +17,10 @@ import { Route as AppOrgListRouteRouteImport } from './routes/app/_org-list/rout
 import { Route as AppSlugRouteRouteImport } from './routes/app/$slug/route'
 import { Route as AppOrgListIndexRouteImport } from './routes/app/_org-list/index'
 import { Route as AppOrgListInvitationsRouteImport } from './routes/app/_org-list/invitations'
-import { Route as AppSlugOrganizationRouteImport } from './routes/app/$slug/organization'
-import { Route as AppSlugOrganizationIndexRouteImport } from './routes/app/$slug/organization.index'
+import { Route as AppSlugSettingsRouteImport } from './routes/app/$slug/settings'
+import { Route as AppSlugSettingsIndexRouteImport } from './routes/app/$slug/settings.index'
 import { Route as AppSlugItemsIndexRouteImport } from './routes/app/$slug/_items/index'
-import { Route as AppSlugOrganizationInvitationsRouteImport } from './routes/app/$slug/organization.invitations'
+import { Route as AppSlugSettingsInvitationsRouteImport } from './routes/app/$slug/settings.invitations'
 import { Route as AppSlugItemsIdRouteImport } from './routes/app/$slug/_items/$id'
 
 const AuthRouteRoute = AuthRouteRouteImport.update({
@@ -62,27 +62,26 @@ const AppOrgListInvitationsRoute = AppOrgListInvitationsRouteImport.update({
   path: '/invitations',
   getParentRoute: () => AppOrgListRouteRoute,
 } as any)
-const AppSlugOrganizationRoute = AppSlugOrganizationRouteImport.update({
-  id: '/organization',
-  path: '/organization',
+const AppSlugSettingsRoute = AppSlugSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AppSlugRouteRoute,
 } as any)
-const AppSlugOrganizationIndexRoute =
-  AppSlugOrganizationIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AppSlugOrganizationRoute,
-  } as any)
+const AppSlugSettingsIndexRoute = AppSlugSettingsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppSlugSettingsRoute,
+} as any)
 const AppSlugItemsIndexRoute = AppSlugItemsIndexRouteImport.update({
   id: '/_items/',
   path: '/',
   getParentRoute: () => AppSlugRouteRoute,
 } as any)
-const AppSlugOrganizationInvitationsRoute =
-  AppSlugOrganizationInvitationsRouteImport.update({
+const AppSlugSettingsInvitationsRoute =
+  AppSlugSettingsInvitationsRouteImport.update({
     id: '/invitations',
     path: '/invitations',
-    getParentRoute: () => AppSlugOrganizationRoute,
+    getParentRoute: () => AppSlugSettingsRoute,
   } as any)
 const AppSlugItemsIdRoute = AppSlugItemsIdRouteImport.update({
   id: '/_items/$id',
@@ -96,13 +95,13 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppOrgListRouteRouteWithChildren
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/app/$slug/organization': typeof AppSlugOrganizationRouteWithChildren
+  '/app/$slug/settings': typeof AppSlugSettingsRouteWithChildren
   '/app/invitations': typeof AppOrgListInvitationsRoute
   '/app/': typeof AppOrgListIndexRoute
   '/app/$slug/$id': typeof AppSlugItemsIdRoute
-  '/app/$slug/organization/invitations': typeof AppSlugOrganizationInvitationsRoute
+  '/app/$slug/settings/invitations': typeof AppSlugSettingsInvitationsRoute
   '/app/$slug/': typeof AppSlugItemsIndexRoute
-  '/app/$slug/organization/': typeof AppSlugOrganizationIndexRoute
+  '/app/$slug/settings/': typeof AppSlugSettingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -111,9 +110,9 @@ export interface FileRoutesByTo {
   '/app/invitations': typeof AppOrgListInvitationsRoute
   '/app': typeof AppOrgListIndexRoute
   '/app/$slug/$id': typeof AppSlugItemsIdRoute
-  '/app/$slug/organization/invitations': typeof AppSlugOrganizationInvitationsRoute
+  '/app/$slug/settings/invitations': typeof AppSlugSettingsInvitationsRoute
   '/app/$slug': typeof AppSlugItemsIndexRoute
-  '/app/$slug/organization': typeof AppSlugOrganizationIndexRoute
+  '/app/$slug/settings': typeof AppSlugSettingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -123,13 +122,13 @@ export interface FileRoutesById {
   '/app/_org-list': typeof AppOrgListRouteRouteWithChildren
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
-  '/app/$slug/organization': typeof AppSlugOrganizationRouteWithChildren
+  '/app/$slug/settings': typeof AppSlugSettingsRouteWithChildren
   '/app/_org-list/invitations': typeof AppOrgListInvitationsRoute
   '/app/_org-list/': typeof AppOrgListIndexRoute
   '/app/$slug/_items/$id': typeof AppSlugItemsIdRoute
-  '/app/$slug/organization/invitations': typeof AppSlugOrganizationInvitationsRoute
+  '/app/$slug/settings/invitations': typeof AppSlugSettingsInvitationsRoute
   '/app/$slug/_items/': typeof AppSlugItemsIndexRoute
-  '/app/$slug/organization/': typeof AppSlugOrganizationIndexRoute
+  '/app/$slug/settings/': typeof AppSlugSettingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -139,13 +138,13 @@ export interface FileRouteTypes {
     | '/app'
     | '/sign-in'
     | '/sign-up'
-    | '/app/$slug/organization'
+    | '/app/$slug/settings'
     | '/app/invitations'
     | '/app/'
     | '/app/$slug/$id'
-    | '/app/$slug/organization/invitations'
+    | '/app/$slug/settings/invitations'
     | '/app/$slug/'
-    | '/app/$slug/organization/'
+    | '/app/$slug/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -154,9 +153,9 @@ export interface FileRouteTypes {
     | '/app/invitations'
     | '/app'
     | '/app/$slug/$id'
-    | '/app/$slug/organization/invitations'
+    | '/app/$slug/settings/invitations'
     | '/app/$slug'
-    | '/app/$slug/organization'
+    | '/app/$slug/settings'
   id:
     | '__root__'
     | '/'
@@ -165,13 +164,13 @@ export interface FileRouteTypes {
     | '/app/_org-list'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
-    | '/app/$slug/organization'
+    | '/app/$slug/settings'
     | '/app/_org-list/invitations'
     | '/app/_org-list/'
     | '/app/$slug/_items/$id'
-    | '/app/$slug/organization/invitations'
+    | '/app/$slug/settings/invitations'
     | '/app/$slug/_items/'
-    | '/app/$slug/organization/'
+    | '/app/$slug/settings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -239,19 +238,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOrgListInvitationsRouteImport
       parentRoute: typeof AppOrgListRouteRoute
     }
-    '/app/$slug/organization': {
-      id: '/app/$slug/organization'
-      path: '/organization'
-      fullPath: '/app/$slug/organization'
-      preLoaderRoute: typeof AppSlugOrganizationRouteImport
+    '/app/$slug/settings': {
+      id: '/app/$slug/settings'
+      path: '/settings'
+      fullPath: '/app/$slug/settings'
+      preLoaderRoute: typeof AppSlugSettingsRouteImport
       parentRoute: typeof AppSlugRouteRoute
     }
-    '/app/$slug/organization/': {
-      id: '/app/$slug/organization/'
+    '/app/$slug/settings/': {
+      id: '/app/$slug/settings/'
       path: '/'
-      fullPath: '/app/$slug/organization/'
-      preLoaderRoute: typeof AppSlugOrganizationIndexRouteImport
-      parentRoute: typeof AppSlugOrganizationRoute
+      fullPath: '/app/$slug/settings/'
+      preLoaderRoute: typeof AppSlugSettingsIndexRouteImport
+      parentRoute: typeof AppSlugSettingsRoute
     }
     '/app/$slug/_items/': {
       id: '/app/$slug/_items/'
@@ -260,12 +259,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSlugItemsIndexRouteImport
       parentRoute: typeof AppSlugRouteRoute
     }
-    '/app/$slug/organization/invitations': {
-      id: '/app/$slug/organization/invitations'
+    '/app/$slug/settings/invitations': {
+      id: '/app/$slug/settings/invitations'
       path: '/invitations'
-      fullPath: '/app/$slug/organization/invitations'
-      preLoaderRoute: typeof AppSlugOrganizationInvitationsRouteImport
-      parentRoute: typeof AppSlugOrganizationRoute
+      fullPath: '/app/$slug/settings/invitations'
+      preLoaderRoute: typeof AppSlugSettingsInvitationsRouteImport
+      parentRoute: typeof AppSlugSettingsRoute
     }
     '/app/$slug/_items/$id': {
       id: '/app/$slug/_items/$id'
@@ -291,27 +290,28 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
-interface AppSlugOrganizationRouteChildren {
-  AppSlugOrganizationInvitationsRoute: typeof AppSlugOrganizationInvitationsRoute
-  AppSlugOrganizationIndexRoute: typeof AppSlugOrganizationIndexRoute
+interface AppSlugSettingsRouteChildren {
+  AppSlugSettingsInvitationsRoute: typeof AppSlugSettingsInvitationsRoute
+  AppSlugSettingsIndexRoute: typeof AppSlugSettingsIndexRoute
 }
 
-const AppSlugOrganizationRouteChildren: AppSlugOrganizationRouteChildren = {
-  AppSlugOrganizationInvitationsRoute: AppSlugOrganizationInvitationsRoute,
-  AppSlugOrganizationIndexRoute: AppSlugOrganizationIndexRoute,
+const AppSlugSettingsRouteChildren: AppSlugSettingsRouteChildren = {
+  AppSlugSettingsInvitationsRoute: AppSlugSettingsInvitationsRoute,
+  AppSlugSettingsIndexRoute: AppSlugSettingsIndexRoute,
 }
 
-const AppSlugOrganizationRouteWithChildren =
-  AppSlugOrganizationRoute._addFileChildren(AppSlugOrganizationRouteChildren)
+const AppSlugSettingsRouteWithChildren = AppSlugSettingsRoute._addFileChildren(
+  AppSlugSettingsRouteChildren,
+)
 
 interface AppSlugRouteRouteChildren {
-  AppSlugOrganizationRoute: typeof AppSlugOrganizationRouteWithChildren
+  AppSlugSettingsRoute: typeof AppSlugSettingsRouteWithChildren
   AppSlugItemsIdRoute: typeof AppSlugItemsIdRoute
   AppSlugItemsIndexRoute: typeof AppSlugItemsIndexRoute
 }
 
 const AppSlugRouteRouteChildren: AppSlugRouteRouteChildren = {
-  AppSlugOrganizationRoute: AppSlugOrganizationRouteWithChildren,
+  AppSlugSettingsRoute: AppSlugSettingsRouteWithChildren,
   AppSlugItemsIdRoute: AppSlugItemsIdRoute,
   AppSlugItemsIndexRoute: AppSlugItemsIndexRoute,
 }
