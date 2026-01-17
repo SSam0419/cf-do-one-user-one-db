@@ -11,7 +11,7 @@ function RouteComponent() {
     <div className="flex gap-6 items-start w-full">
       <div className="flex flex-col border-r rounded-md min-h-64 px-2 py-4 gap-2 items-end w-32">
         <Link
-          to="/app/$slug/organization"
+          to="/app/$slug/settings"
           params={{ slug: slug }}
           activeOptions={{ exact: true }}
         >
@@ -26,7 +26,7 @@ function RouteComponent() {
             </div>
           )}
         </Link>
-        <Link to="/app/$slug/organization/invitations" params={{ slug: slug }}>
+        <Link to="/app/$slug/settings/invitations" params={{ slug: slug }}>
           {({ isActive }) => (
             <div
               className={cn(

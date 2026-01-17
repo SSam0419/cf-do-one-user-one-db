@@ -3,57 +3,58 @@
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "durable-object-yjs",
-	"main": "worker/index.ts",
-	"compatibility_date": "2026-01-01",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
-	"assets": {
-		"not_found_handling": "single-page-application",
-	},
-	"routes": [
-		{
-			"pattern": "do.lee-sam.com",
-			"zone_name": "lee-sam.com",
-			"custom_domain": true,
-		},
-	],
-	"observability": {
-		"enabled": true,
-	},
-	"migrations": [
-		{
-			"tag": "v1",
-			"new_sqlite_classes": [
-				"WorkspaceAPI",
-				"MyYServer"
-			],
-		},
-	],
-	"durable_objects": {
-		"bindings": [
-			{
-				"name": "MyYServer",
-				"class_name": "MyYServer",
-			},
-			{
-				"name": "WORKSPACE_API",
-				"class_name": "WorkspaceAPI",
-			},
-		],
-	},
-	"d1_databases": [
-		{
-			"binding": "BetterAuthDB",
-			"database_name": "better-auth-db",
-			"database_id": "c178274f-33c8-4ab3-984e-398fdf95a28b",
-			"migrations_dir": "./worker/server/db/better-auth/drizzle",
-			"remote": true,
-		},
-	],
-	"vars": {
-		"VITE_URL": "https://do.lee-sam.com"
-	},
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "durable-object-yjs",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "not_found_handling": "single-page-application",
+  },
+  "routes": [
+    {
+      "pattern": "do.lee-sam.com",
+      "zone_name": "lee-sam.com",
+      "custom_domain": true,
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true,
+    },
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["WorkspaceAPI", "MyYServer"],
+    },
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MyYServer",
+        "class_name": "MyYServer",
+      },
+      {
+        "name": "WORKSPACE_API",
+        "class_name": "WorkspaceAPI",
+      },
+    ],
+  },
+  "d1_databases": [
+    {
+      "binding": "BetterAuthDB",
+      "database_name": "better-auth-db",
+      "database_id": "c178274f-33c8-4ab3-984e-398fdf95a28b",
+      "migrations_dir": "./worker/server/db/better-auth/drizzle",
+      "remote": true,
+    },
+  ],
+  "vars": {
+    "VITE_URL": "https://do.lee-sam.com",
+  },
+  "placement": {
+    "mode": "smart",
+  },
 }
